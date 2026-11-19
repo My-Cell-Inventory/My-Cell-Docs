@@ -1,0 +1,22 @@
+name: CI documental
+
+on:
+  push:
+  pull_request:
+    branches: [develop, qa, main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-docs:
+    name: Validar documentación
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Comprobar archivos Markdown y enlaces locales
+        run: python3 scripts/ci/check_docs.py

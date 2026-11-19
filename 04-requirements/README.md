@@ -1,0 +1,12 @@
+# Requisitos
+
+Organiza los requisitos funcionales, no funcionales, historias de usuario y su trazabilidad.
+
+- [Plantilla de hu](_template-hu.md)
+
+## Especificación del MVP
+
+- [SRS del Sistema de Inventario MVP · PDF](srs-sistema-inventario-mvp-mycell.pdf)
+- [SRS del Sistema de Inventario MVP · Markdown](srs-sistema-inventario-mvp-mycell.md)
+- [Requisitos funcionales y reglas de negocio](functional.md)
+- [Requisitos no funcionales](non-functional.md)
