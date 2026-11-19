@@ -6,6 +6,7 @@ Organiza los requisitos funcionales, no funcionales, historias de usuario y su t
 
 ## Especificación del MVP
 
-- [SRS del Sistema de Inventario MVP · versión 1.0](srs-sistema-inventario-mvp-mycell.pdf)
+- [SRS del Sistema de Inventario MVP · PDF](srs-sistema-inventario-mvp-mycell.pdf)
+- [SRS del Sistema de Inventario MVP · Markdown](srs-sistema-inventario-mvp-mycell.md)
 - [Requisitos funcionales y reglas de negocio](functional.md)
 - [Requisitos no funcionales](non-functional.md)
