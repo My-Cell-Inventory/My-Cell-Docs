@@ -1,5 +1,8 @@
 # Contexto
 
-MY CELL es un gestor de inventario. Aquí se documentarán el alcance, los interesados y el vocabulario del proyecto.
+Información de negocio y límites del sistema de inventario.
 
-- [Plantilla de project profile](_template-project-profile.md)
+- [Visión general](overview.md)
+- [Alcance del MVP](scope.md)
+- [Glosario](glossary.md)
+- [Plantilla de perfil](_template-project-profile.md)

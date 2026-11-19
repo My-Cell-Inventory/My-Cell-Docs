@@ -1,9 +1,12 @@
 # Gobernanza
 
-Reglas para mantener la documentación y revisar contribuciones.
+Reglas para proponer, revisar y validar contribuciones de MY CELL.
 
-- [git conventions](git-conventions.md)
-- [documentation rules](documentation-rules.md)
-- [definition of ready](definition-of-ready.md)
-- [definition of done](definition-of-done.md)
-- [security rules](security-rules.md)
+- [Ramas, commits y PR](git-conventions.md)
+- [Reglas de documentación](documentation-rules.md)
+- [Convenciones ágiles](agile-conventions.md)
+- [Definition of Ready](definition-of-ready.md)
+- [Definition of Done](definition-of-done.md)
+- [Matriz de impacto documental](docs-touchpoints-matrix.md)
+- [Política de acceso y publicación](security-policy.md)
+- [Seguridad documental](security-rules.md)

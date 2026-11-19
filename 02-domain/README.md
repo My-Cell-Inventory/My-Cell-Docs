@@ -1,3 +1,7 @@
 # Dominio
 
-Documenta el vocabulario, las entidades, las reglas de negocio y los eventos del inventario cuando el equipo los valide.
+Áreas, conceptos y hechos de negocio del inventario.
+
+- [Mapa de dominio](domain-map.md)
+- [Entidades y reglas](entities-and-rules.md)
+- [Eventos de dominio](domain-events.md)

@@ -1,5 +1,10 @@
 # Producto
 
-Registra la visión, los problemas por resolver, el backlog y la hoja de ruta.
+Problema, visión y planificación propuesta del MVP.
 
-- [Plantilla de prd](_template-prd.md)
+- [Visión](vision.md)
+- [Definición del problema](problem-framing.md)
+- [Descubrimiento](discovery-brief.md)
+- [Backlog](product-backlog.md)
+- [Hoja de ruta](roadmap.md)
+- [Plantilla de PRD](_template-prd.md)
