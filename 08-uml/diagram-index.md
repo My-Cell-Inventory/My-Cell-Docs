@@ -14,3 +14,9 @@ Este plan define la secuencia para modelar el comportamiento y los datos del MVP
 | 8 | MER y diagrama ER | Definir el modelo entidad-relación (MER) y representarlo en el diagrama ER. Mostrar las entidades persistentes, sus claves, relaciones y cardinalidades. |
 
 Al elaborar cada entregable, indica de qué caso de uso o RF parte. Guarda los archivos en las carpetas de [fuentes editables](diagrams/source/README.md) y [exportaciones](diagrams/exports/README.md), según corresponda.
+
+## Diagramas registrados
+
+| Diagrama | Tipo | Referencia |
+| --- | --- | --- |
+| Diagramas de casos de uso del MVP de MY CELL | Casos de uso | [Ver los diagramas de casos de uso en Google Drive](https://drive.google.com/file/d/1crknSn2f4_yJcCooH0gF7Rk925qNBy9K/view?usp=sharing) |
