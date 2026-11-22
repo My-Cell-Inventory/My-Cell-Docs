@@ -14,5 +14,8 @@
 | CSV | Archivo tabular para importar mercancía o exportar reportes. |
 | SMTP | Protocolo usado para enviar correo. |
 | Bitácora | Registro de quién realizó qué acción, en qué local y cuándo. |
+| Dueño Principal | Cuenta inicial creada con datos semilla, con todos los permisos y sin opción de desactivación. |
+| Dueño secundario | Dueño con acceso a los módulos habilitados por el Principal. |
+| Código de verificación | Código de seis dígitos enviado por correo para recuperar la contraseña. |
 
-Fuente: [SRS 1.0](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf).
+Fuente: [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf).
