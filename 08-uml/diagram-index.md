@@ -20,3 +20,4 @@ Al elaborar cada entregable, indica de qué caso de uso o RF parte. Guarda los a
 | Diagrama | Tipo | Referencia |
 | --- | --- | --- |
 | Diagramas de casos de uso del MVP de MY CELL | Casos de uso | [Ver los diagramas de casos de uso en Google Drive](https://drive.google.com/file/d/1crknSn2f4_yJcCooH0gF7Rk925qNBy9K/view?usp=sharing) |
+| Tablero de priorización de MY CELL | Priorización de casos de uso | [Abrir tablero en Claude](https://claude.ai/artifact/CyW6F5KXKASgzYUtaJHeCS) · [Archivo HTML](diagrams/exports/tablero-priorizacion-my-cell.html) |
