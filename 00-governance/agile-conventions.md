@@ -1,6 +1,6 @@
 # Convenciones ágiles
 
-El [backlog](../03-product/product-backlog.md) agrupa el MVP por capacidades. Usa los IDs RF, RN y RNF del [SRS 1.0](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) en historias, criterios de aceptación y evidencias.
+El [backlog](../03-product/product-backlog.md) agrupa el MVP por capacidades. Usa los IDs RF, RN y RNF del [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) en historias, criterios de aceptación y evidencias.
 
 ## Flujo propuesto
 

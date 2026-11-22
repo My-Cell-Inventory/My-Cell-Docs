@@ -4,7 +4,7 @@ Agrupación inicial de capacidades del MVP. Las historias y fechas de entrega qu
 
 | Capacidad | Cobertura | Dependencia de refinamiento |
 | --- | --- | --- |
-| Acceso | `RF-1.1–1.7` | Asignación de local junto con RF-2 |
+| Acceso | `RF-1.1–1.10` | Asignación de local junto con RF-2 |
 | Locales y vendedores | `RF-2.1–2.5` | Usuarios y permisos RF-1 |
 | Productos y precios | `RF-3.1–3.8` | Costo promedio coordinado con RF-4 |
 | Mercancía e inventario | `RF-4.1–4.11` | Locales RF-2 y catálogo RF-3 |

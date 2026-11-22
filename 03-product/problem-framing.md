@@ -2,7 +2,7 @@
 
 ## Situación actual
 
-El negocio carece de inventario formal. El problema definido en el [SRS 1.0](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) es controlar lo que llega y sale, y conocer ganancias y pérdidas por producto y local.
+El negocio carece de inventario formal. El problema definido en el [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) es controlar lo que llega y sale, y conocer ganancias y pérdidas por producto y local.
 
 | Actor | Necesidad |
 | --- | --- |

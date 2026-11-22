@@ -16,4 +16,4 @@
 | ¿Qué reportes se consultan habitualmente y cuántos pasos son aceptables para vender? | Aterriza la validación de RNF-4 y RNF-6. |
 | ¿Qué diferencias de stock y caja se observan al iniciar? | Fija una línea base para medir el impacto del MVP. |
 
-Fuente: [SRS 1.0](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf). El [backlog](product-backlog.md) organiza las capacidades confirmadas.
+Fuente: [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf). El [backlog](product-backlog.md) organiza las capacidades confirmadas.

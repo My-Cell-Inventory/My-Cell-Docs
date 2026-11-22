@@ -4,7 +4,7 @@
 
 | Entidad | Relación o dato clave | Reglas del SRS |
 | --- | --- | --- |
-| Usuario / local | Un Encargado pertenece a un local. Se conserva el historial al desactivar. | RN-1.1 a RN-1.4 |
+| Usuario / local | Cada usuario tiene un número de documento único. El Encargado pertenece a un local y el Dueño secundario tiene módulos asignados por el Principal. Se conserva el historial al desactivar. | RN-1.1 a RN-1.11 |
 | Vendedor | Nombre y local. Su atribución es opcional en ventas y obligatoria en dañados. | RN-2.3, RN-2.4, RN-5.6, RN-7.1 |
 | Producto / categoría | SKU único, margen, precio, stock mínimo y plazo de garantía. | RN-3.1 a RN-3.5 |
 | Entrada / existencia | Entradas por local con proveedor, cantidad y costo unitario. Existencia calculada desde los movimientos. | RN-4.1 a RN-4.5 |

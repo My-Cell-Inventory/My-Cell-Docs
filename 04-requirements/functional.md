@@ -1,35 +1,47 @@
 # Requisitos funcionales
 
-> Fuente: [SRS del Sistema de Inventario MVP, versión 1.0](srs-sistema-inventario-mvp-mycell.pdf) · 18 de noviembre de 2026
+> Fuente: [SRS del Sistema de Inventario MVP, versión 1.1](srs-sistema-inventario-mvp-mycell.pdf) · 19 de noviembre de 2026
 
-Los identificadores `RF-módulo.número` y `RN-módulo.número` corresponden a la sección 3 del SRS. La matriz de permisos se encuentra en la sección 4 (p. 12). El MVP tiene un único Dueño y un Encargado activo por local. Las operaciones del Encargado se limitan a su local y los vendedores se registran como datos.
+Los identificadores `RF-módulo.número` y `RN-módulo.número` corresponden a la sección 3 del SRS. La matriz de permisos se encuentra en la sección 4 (p. 13). El MVP tiene un Dueño Principal, puede tener Dueños secundarios con permisos por módulo y tiene un Encargado activo por local. Las operaciones del Encargado se limitan a su local y los vendedores se registran como datos.
 
 ## 1. Acceso, usuarios y roles
 
-SRS, pp. 4.
+SRS, pp. 4–5.
 
 ### Reglas de negocio
 
-- **RN-1.1** — Solo Dueño y Encargado tienen cuenta.
-- **RN-1.2** — Cada Encargado opera únicamente en su local.
-- **RN-1.3** — El servidor valida permisos.
-- **RN-1.4** — Los usuarios se desactivan y conservan historial.
+- **RN-1.1** — Solo existen dos roles con acceso: Dueño y Encargado. El rol Dueño tiene dos tipos: Dueño Principal y Dueño secundario. Los vendedores no tienen cuenta.
+- **RN-1.2** — Cada Encargado pertenece a un solo local y solo puede operar sobre ese local.
+- **RN-1.3** — Los permisos se validan en el servidor, no solo ocultando botones en pantalla.
+- **RN-1.4** — Los usuarios nunca se eliminan: se desactivan para conservar su historial. Aplica a Dueños y Encargados.
+- **RN-1.5** — Se inicia sesión con número de documento (único por usuario) y contraseña.
+- **RN-1.6** — El Dueño Principal se crea con datos semilla al instalar el sistema. Tiene todos los permisos, no se puede desactivar y es el único que asigna permisos a los Dueños secundarios.
+- **RN-1.7** — Los permisos de un Dueño secundario se asignan por módulo (RF-1 a RF-9). Un módulo no habilitado no se ve ni se puede operar.
+- **RN-1.8** — En los demás módulos, «Dueño» se refiere a cualquier Dueño que tenga ese módulo habilitado (el Principal siempre lo tiene).
+- **RN-1.9** — Solo los Dueños crean, editan, desactivan y reactivan Dueños y Encargados. Un Dueño secundario no puede editar ni desactivar al Principal ni cambiar permisos. El Encargado no edita sus datos; solo cambia su contraseña con la recuperación.
+- **RN-1.10** — El sistema es solo para mayores de edad. Al registrar un Encargado o un Dueño se muestra un aviso que debe aceptarse; la aceptación queda en bitácora. No se pide tipo de documento. La responsabilidad recae en quien registra.
+- **RN-1.11** — El código de verificación de 6 dígitos tiene vencimiento corto y límite de intentos (valores por definir; sugerencia: 10 minutos y 5 intentos). El mensaje no revela si el correo existe.
 
 ### Requisitos
 
 | ID | Requisito | Rol |
 | --- | --- | --- |
-| RF-1.1 | Iniciar sesión con correo y contraseña. | Dueño y Encargado |
-| RF-1.2 | Cerrar sesión y expirar automáticamente por inactividad. | Dueño y Encargado |
-| RF-1.3 | Restablecer contraseña con un enlace enviado por SMTP. | Dueño y Encargado |
-| RF-1.4 | Crear usuarios Encargado y asignarlos a un local. | Dueño |
-| RF-1.5 | Reemplazar al Encargado de un local, revocando de inmediato el acceso del anterior y habilitando el del nuevo. | Dueño |
-| RF-1.6 | Desactivar y reactivar usuarios conservando su historial. | Dueño |
-| RF-1.7 | Mostrar menús, datos y acciones por rol y rechazar operaciones no autorizadas en el servidor. | Sistema |
+| RF-1.1 | Inicio de sesión con número de documento y contraseña. | Dueño y Encargado |
+| RF-1.2 | Cierre de sesión y expiración automática por inactividad. | Dueño y Encargado |
+| RF-1.3 | Restablecer contraseña: en «¿Olvidaste tu contraseña?» se pide el correo, se envía un código de 6 dígitos (SMTP) y se define la nueva contraseña. | Dueño y Encargado |
+| RF-1.4 | Registrar Encargados con nombre, apellidos, número de documento y email, asignarlos a un local y mostrar el aviso de mayoría de edad. | Dueño |
+| RF-1.5 | Cambiar el Encargado de un local: el anterior pierde acceso al instante y el nuevo lo recibe. | Dueño |
+| RF-1.6 | Desactivar y reactivar Dueños y Encargados conservando todo su historial. El Dueño Principal no se puede desactivar. | Dueño |
+| RF-1.7 | Mostrar menús, datos y acciones según el rol y los módulos habilitados, y rechazar en el servidor cualquier acción no permitida. | Sistema |
+| RF-1.8 | Registrar Dueños secundarios con los mismos datos y el aviso de mayoría de edad. | Dueño |
+| RF-1.9 | Editar los datos de Dueños y Encargados. | Dueño |
+| RF-1.10 | Asignar y cambiar los módulos habilitados de cada Dueño secundario. | Dueño Principal |
+
+> **Texto sugerido del aviso (RN-1.10):** «Este sistema es solo para personas mayores de 18 años. No se permite registrar menores de edad. Al continuar, declaras que la persona que registras es mayor de edad y asumes la responsabilidad por esa declaración.»
 
 ## 2. Locales y vendedores
 
-SRS, pp. 5.
+SRS, pp. 5–6.
 
 ### Reglas de negocio
 
@@ -50,7 +62,7 @@ SRS, pp. 5.
 
 ## 3. Productos y precios
 
-SRS, pp. 5–6.
+SRS, p. 6.
 
 ### Reglas de negocio
 
@@ -75,7 +87,7 @@ SRS, pp. 5–6.
 
 ## 4. Entradas de mercancía e inventario
 
-SRS, pp. 6–7.
+SRS, p. 7.
 
 ### Reglas de negocio
 
@@ -103,7 +115,7 @@ SRS, pp. 6–7.
 
 ## 5. Ventas y caja
 
-SRS, pp. 7–8.
+SRS, p. 8.
 
 ### Reglas de negocio
 
@@ -134,7 +146,7 @@ SRS, pp. 7–8.
 
 ## 6. Cambios y garantías
 
-SRS, pp. 8–9.
+SRS, p. 9.
 
 ### Reglas de negocio
 
@@ -165,7 +177,7 @@ SRS, pp. 8–9.
 
 ## 7. Dañados, faltantes e inventario físico
 
-SRS, pp. 9–10.
+SRS, p. 10.
 
 ### Reglas de negocio
 
@@ -196,7 +208,7 @@ SRS, pp. 9–10.
 
 ## 8. Reportes
 
-SRS, pp. 10–11.
+SRS, p. 11.
 
 ### Reglas de negocio
 
@@ -225,7 +237,7 @@ SRS, pp. 10–11.
 
 ## 9. Notificaciones y bitácora
 
-SRS, pp. 11.
+SRS, p. 12.
 
 ### Reglas de negocio
 

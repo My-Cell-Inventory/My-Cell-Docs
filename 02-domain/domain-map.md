@@ -4,7 +4,7 @@ El MVP se organiza en nueve áreas funcionales. El mapa describe responsabilidad
 
 | Módulo | Área | Conceptos | Responsabilidad |
 | --- | --- | --- | --- |
-| RF-1 | Acceso | Usuario y asignación | Sesión, rol y permisos por local |
+| RF-1 | Acceso | Usuario y asignación | Sesión, permisos por rol y local, y habilitación de módulos para Dueños secundarios |
 | RF-2 | Locales y vendedores | Local y vendedor | Ubicación de inventario, caja, ventas y vendedores |
 | RF-3 | Productos y precios | Producto, categoría y cambio de precio | SKU, precios, margen y garantía |
 | RF-4 | Mercancía e inventario | Entrada, movimiento y existencia | Inventario inicial, costo promedio y kardex |

@@ -2,7 +2,7 @@
 
 ## Incluido
 
-- Acceso para un Dueño y un Encargado activo por local. Los vendedores se registran como datos.
+- Acceso para un Dueño Principal, Dueños secundarios con módulos asignados y un Encargado activo por local. El registro de usuarios exige aceptar el aviso de mayoría de edad. Los vendedores se registran como datos.
 - Catálogo, SKU, costo promedio por local, márgenes, precios, stock mínimo y garantía.
 - Inventario inicial, entradas manuales y CSV, stock calculado y kardex.
 - Ventas, caja por local, cierre diario, cambios con diferencia de precio y garantías con plazo.
@@ -17,4 +17,4 @@
 
 ## Condiciones
 
-Una aplicación web para uno o varios locales. Interfaz en español, pesos colombianos y zona horaria de Colombia. Consulta los [requisitos no funcionales](../04-requirements/non-functional.md) y el [SRS 1.0](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) (§§ 5–7).
+Una aplicación web para uno o varios locales. Interfaz en español, pesos colombianos y zona horaria de Colombia. Consulta los [requisitos no funcionales](../04-requirements/non-functional.md) y el [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) (§§ 5–7).
