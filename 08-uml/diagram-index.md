@@ -23,3 +23,4 @@ Al elaborar cada entregable, indica de qué caso de uso o RF parte. Guarda los a
 | Tablero de priorización de MY CELL | Priorización de casos de uso | [Abrir tablero en Claude](https://claude.ai/artifact/CyW6F5KXKASgzYUtaJHeCS) · [Archivo HTML](diagrams/exports/tablero-priorizacion-my-cell.html) |
 | Diagrama de actividades de MY CELL | Actividad | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1xk0R3M2os1-ztKDA7OPRayBu6HVXVKGF/view?usp=sharing) |
 | Diagrama de secuencia de MY CELL | Secuencia | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1OdxisakzvcdQj-t7NMnDvZRUGsuGGV8F/view?usp=sharing) |
+| Diagrama de transición de estados de MY CELL | Transición de estados | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1WYFgxKDreh5wzRbe61E3TENfvQ3RA3EG/view?usp=sharing) |
