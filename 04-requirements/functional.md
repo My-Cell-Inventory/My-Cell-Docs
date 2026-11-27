@@ -1,8 +1,8 @@
 # Requisitos funcionales
 
-> Fuente: [SRS del Sistema de Inventario MVP, versión 1.1](srs-sistema-inventario-mvp-mycell.pdf) · 19 de noviembre de 2026
+> Fuente: [SRS del Sistema de Inventario MVP, versión 1.2](srs-sistema-inventario-mvp-mycell.pdf) · 26 de noviembre de 2026
 
-Los identificadores `RF-módulo.número` y `RN-módulo.número` corresponden a la sección 3 del SRS. La matriz de permisos se encuentra en la sección 4 (p. 13). El MVP tiene un Dueño Principal, puede tener Dueños secundarios con permisos por módulo y tiene un Encargado activo por local. Las operaciones del Encargado se limitan a su local y los vendedores se registran como datos.
+Los identificadores `RF-módulo.número` y `RN-módulo.número` corresponden a la sección 3 del SRS. La matriz de permisos se encuentra en la sección 4 (p. 14). El MVP tiene un Dueño Principal, puede tener Dueños secundarios con permisos por módulo y tiene un Encargado activo por local. Las operaciones del Encargado se limitan a su local y los vendedores se registran como datos.
 
 ## 1. Acceso, usuarios y roles
 
@@ -41,7 +41,7 @@ SRS, pp. 4–5.
 
 ## 2. Locales y vendedores
 
-SRS, pp. 5–6.
+SRS, p. 6.
 
 ### Reglas de negocio
 
@@ -62,60 +62,74 @@ SRS, pp. 5–6.
 
 ## 3. Productos y precios
 
-SRS, p. 6.
+SRS, pp. 6–7.
 
 ### Reglas de negocio
 
-- **RN-3.1** — El SKU es único.
+- **RN-3.1** — Cada producto se identifica por su nombre, que debe ser único. Se compara sin importar mayúsculas, tildes ni espacios de más. No hay SKU.
 - **RN-3.2** — Precio sugerido = costo promedio × (1 + margen). El Dueño puede ajustar el precio final.
-- **RN-3.3** — Costo promedio por local = (stock actual × costo actual + cantidad nueva × costo nuevo) ÷ (stock actual + cantidad nueva).
-- **RN-3.4** — El Encargado solo ve nombre y precio de venta.
-- **RN-3.5** — La garantía se define en días, admite 0 y aplica por igual a cambios y garantías.
+- **RN-3.3** — Costo promedio = (stock actual × costo actual + cantidad nueva × costo nuevo) ÷ (stock actual + cantidad nueva). Se calcula por local.
+- **RN-3.4** — El Encargado solo ve nombre y precio de venta. Nunca costo, margen ni cantidades.
+- **RN-3.5** — Cada producto tiene un tiempo de garantía en días (puede ser 0). Ese mismo plazo aplica a cambios y garantías.
+- **RN-3.6** — Un producto nuevo, creado por una carga o a mano, queda pendiente de completar hasta que el Dueño le defina el precio. Un producto pendiente no se puede vender ni aparece en el catálogo del Encargado.
+- **RN-3.7** — El costo de un producto es el costo de entrada que informa el proveedor (se recalcula como promedio con cada entrada). El Dueño define el margen y el precio de venta.
+- **RN-3.8** — El color o la forma no se controlan por separado: dos unidades con el mismo nombre son el mismo producto. Si el Dueño quiere controlar una variante, debe escribirla en el nombre. Los equipos con serial se manejan igual: sin seguimiento por serial o IMEI.
+- **RN-3.9** — Un producto se elimina solo si nunca tuvo movimientos de ningún tipo (ni siquiera de una carga anulada). Si tiene historial, solo se desactiva.
+- **RN-3.10** — Al cambiar el nombre de un producto, el sistema advierte que las próximas cargas del proveedor deberán usar el nombre nuevo; de lo contrario aparecerán como producto nuevo.
 
 ### Requisitos
 
 | ID | Requisito | Rol |
 | --- | --- | --- |
-| RF-3.1 | Crear y editar productos con SKU, nombre, categoría, costo, margen, precio, stock mínimo y días de garantía. | Dueño |
-| RF-3.2 | Gestionar categorías. | Dueño |
-| RF-3.3 | Definir margen por categoría o producto. | Dueño |
-| RF-3.4 | Consultar el precio sugerido calculado por el sistema y fijar el precio final. | Dueño |
-| RF-3.5 | Recalcular el costo promedio al ingresar mercancía. | Sistema |
-| RF-3.6 | Consultar el catálogo con nombre y precio de venta. | Encargado |
-| RF-3.7 | Desactivar productos y conservar su historial. | Dueño |
-| RF-3.8 | Guardar quién y cuándo cambió el precio o margen, junto con los valores anterior y nuevo. | Sistema |
+| RF-3.1 | Crear y editar productos a mano: nombre, categoría, margen, precio, stock mínimo y días de garantía | Dueño |
+| RF-3.2 | Gestionar categorías de productos | Dueño |
+| RF-3.3 | Definir el margen por categoría o por producto | Dueño |
+| RF-3.4 | Calcular y mostrar el precio sugerido, y permitir fijar el precio final | Dueño |
+| RF-3.5 | Recalcular el costo promedio automáticamente con cada entrada de mercancía | Sistema |
+| RF-3.6 | Consultar el catálogo mostrando solo nombre y precio de venta de los productos con precio (los pendientes no aparecen) | Encargado |
+| RF-3.7 | Desactivar productos sin perder su historial | Dueño |
+| RF-3.8 | Guardar el historial de cambios de precio y margen (quién, cuándo, valor anterior y nuevo) | Sistema |
+| RF-3.9 | Eliminar un producto que nunca tuvo movimientos | Dueño |
+| RF-3.10 | Listar los productos pendientes de completar para definirles categoría y precio | Dueño |
 
 ## 4. Entradas de mercancía e inventario
 
-SRS, p. 7.
+SRS, pp. 8–9.
 
 ### Reglas de negocio
 
-- **RN-4.1** — El stock se calcula como entradas menos salidas (ventas, cambios, dañados, garantías y faltantes) más devoluciones.
-- **RN-4.2** — Cada entrada guarda fecha, local, proveedor, producto, cantidad y costo unitario.
-- **RN-4.3** — Solo el Dueño carga mercancía y consulta inventario.
-- **RN-4.4** — Se valida todo el CSV antes de guardar. Un error impide guardar la carga.
-- **RN-4.5** — El primer conteo del local es el inventario inicial y sirve como base de los cálculos.
+- **RN-4.1** — El stock nunca se escribe a mano. Stock = entradas − salidas (ventas, cambios, dañados, garantías y faltantes) + devoluciones.
+- **RN-4.2** — Cada entrada pertenece a una carga (un documento del proveedor) y guarda: fecha de registro, local, proveedor, número y fecha del documento, producto, cantidad y costo unitario.
+- **RN-4.3** — Solo el Dueño carga mercancía y ve el inventario.
+- **RN-4.4** — La carga por CSV se valida completa antes de guardar: si algo falla, no se guarda nada.
+- **RN-4.5** — El primer conteo de un local se registra como inventario inicial y es el punto de partida de todos los cálculos.
+- **RN-4.6** — Una carga se identifica por proveedor + número de documento y no se puede registrar dos veces; para repetirla hay que anular la anterior. Si el documento no trae número, se identifica por proveedor + fecha + total (la suma de las líneas) y el sistema solo avisa de un posible duplicado.
+- **RN-4.7** — Un producto del archivo se reconoce por su nombre exacto (sin importar mayúsculas, tildes ni espacios de más). Nunca se comparan nombres parecidos: si no coincide exactamente, se trata como producto nuevo y se ve en la vista previa.
+- **RN-4.8** — El stock y el costo promedio cuentan desde la fecha en que se registra la carga. La fecha del documento se guarda solo como referencia.
+- **RN-4.9** — Solo el Dueño anula una carga, con un motivo. No se puede anular si algún producto quedaría con stock negativo. La carga anulada queda en el historial y el mismo documento puede volver a cargarse. Los productos que esa carga creó permanecen en el catálogo y el Dueño puede desactivarlos.
+- **RN-4.10** — El proveedor se identifica por su nombre; si no existe, se crea al registrar la carga.
 
 ### Requisitos
 
 | ID | Requisito | Rol |
 | --- | --- | --- |
-| RF-4.1 | Registrar una entrada manual de mercancía. | Dueño |
-| RF-4.2 | Descargar la plantilla CSV con las columnas requeridas. | Dueño |
-| RF-4.3 | Cargar entradas de un CSV para un local de destino. | Dueño |
-| RF-4.4 | Validar columnas obligatorias, números mayores que 0 y detectar SKUs repetidos. | Sistema |
-| RF-4.5 | Revisar antes de confirmar los productos nuevos, existentes y las filas con error. | Dueño |
-| RF-4.6 | Guardar toda la carga en una única operación atómica. | Sistema |
-| RF-4.7 | Crear automáticamente los productos cuyo SKU aún no existe. | Sistema |
-| RF-4.8 | Registrar el inventario inicial de un local. | Dueño |
-| RF-4.9 | Calcular stock por producto y local. | Sistema |
-| RF-4.10 | Consultar stock, costo y valor total del inventario por local. | Dueño |
-| RF-4.11 | Consultar el kardex de cada producto. | Dueño |
+| RF-4.1 | Registrar una entrada de mercancía de forma manual: proveedor, número y fecha del documento, local y los productos con cantidad y costo | Dueño |
+| RF-4.2 | Descargar una plantilla CSV con las columnas: proveedor, número de documento, fecha del documento, descripción, cantidad, costo unitario y categoría (opcional) | Dueño |
+| RF-4.3 | Cargar entradas desde un archivo CSV, eligiendo el local de destino | Dueño |
+| RF-4.4 | Validar el CSV: columnas obligatorias, números válidos mayores a 0, descripciones repetidas dentro del archivo y que la carga no esté ya registrada | Sistema |
+| RF-4.5 | Mostrar una vista previa antes de confirmar: productos nuevos, existentes, filas con error y la suma de las líneas | Dueño |
+| RF-4.6 | Guardar toda la carga en una sola operación (todo o nada) | Sistema |
+| RF-4.7 | Crear automáticamente los productos nuevos, en estado pendiente de completar, cuando la descripción no coincide exactamente con un producto existente | Sistema |
+| RF-4.8 | Registrar el inventario inicial de un local | Dueño |
+| RF-4.9 | Calcular el stock por producto y por local | Sistema |
+| RF-4.10 | Consultar el inventario con stock, costo y valor total por local | Dueño |
+| RF-4.11 | Consultar el historial de movimientos (kardex) de cada producto | Dueño |
+| RF-4.12 | Anular una carga de mercancía indicando el motivo; el sistema recalcula el costo promedio y no la permite si algún producto quedaría con stock negativo | Dueño |
+| RF-4.13 | Consultar el listado de cargas: proveedor, número y fecha del documento, local, total y estado (activa o anulada) | Dueño |
 
 ## 5. Ventas y caja
 
-SRS, p. 8.
+SRS, pp. 9–10.
 
 ### Reglas de negocio
 
@@ -146,7 +160,7 @@ SRS, p. 8.
 
 ## 6. Cambios y garantías
 
-SRS, p. 9.
+SRS, pp. 10–11.
 
 ### Reglas de negocio
 
@@ -177,7 +191,7 @@ SRS, p. 9.
 
 ## 7. Dañados, faltantes e inventario físico
 
-SRS, p. 10.
+SRS, pp. 11–12.
 
 ### Reglas de negocio
 
@@ -208,7 +222,7 @@ SRS, p. 10.
 
 ## 8. Reportes
 
-SRS, p. 11.
+SRS, pp. 12–13.
 
 ### Reglas de negocio
 
@@ -237,7 +251,7 @@ SRS, p. 11.
 
 ## 9. Notificaciones y bitácora
 
-SRS, p. 12.
+SRS, p. 13.
 
 ### Reglas de negocio
 

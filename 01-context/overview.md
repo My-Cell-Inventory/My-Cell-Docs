@@ -11,4 +11,4 @@ My Cell Tecnología necesita formalizar el control de mercancía y conocer ganan
 
 El flujo comienza con el inventario inicial de cada local. Las entradas y salidas determinan el stock. El cierre diario registra diferencias de caja y el inventario físico semestral contrasta existencias calculadas con el conteo.
 
-Consulta el [alcance](scope.md), el [mapa de dominio](../02-domain/domain-map.md) y el [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) (§§ 1–2).
+Consulta el [alcance](scope.md), el [mapa de dominio](../02-domain/domain-map.md) y el [SRS 1.2](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf) (§§ 1–2).

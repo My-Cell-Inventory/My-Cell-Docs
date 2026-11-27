@@ -8,9 +8,9 @@
 |---|---|
 | **Proyecto** | Sistema de Inventario para almacenes de accesorios de celulares |
 | **Cliente** | My Cell Tecnología |
-| **Versión del documento** | 1.1 (MVP) |
-| **Fecha** | 19 de noviembre de 2026 |
-| **Documento previo** | Propuesta del Sistema de Inventario V1.1 (aprobada en lo funcional) y SRS v1.0 |
+| **Versión del documento** | 1.2 (MVP) |
+| **Fecha** | 26 de noviembre de 2026 |
+| **Documento previo** | SRS v1.1 y análisis de la remisión del proveedor (GREEN TECH) |
 
 ### Historial de versiones
 
@@ -18,6 +18,7 @@
 |---|---|---|
 | 1.0 | 18/11/2026 | Primera versión del SRS con los 9 módulos. |
 | 1.1 | 19/11/2026 | Módulo 1 actualizado por seguridad: inicio de sesión con documento, Dueño Principal y Dueños secundarios con permisos por módulo, código de verificación para restablecer contraseña y aviso de mayoría de edad. Los módulos 2 a 9 no cambian. |
+| 1.2 | 26/11/2026 | Módulos 3 y 4: identificación del producto por nombre, cargas por documento del proveedor, productos pendientes hasta tener precio, anulación de cargas y eliminación de productos sin historial. |
 
 ---
 
@@ -49,7 +50,8 @@ El sistema permite a un negocio con uno o varios locales, que hoy no lleva un in
 
 | Término | Significado |
 |---|---|
-| **SKU** | Código único de cada producto. |
+| **Carga** | Entrega de un proveedor registrada en el sistema e identificada por proveedor y número de documento. |
+| **Producto pendiente** | Producto nuevo sin precio. No se puede vender hasta que el Dueño lo complete. |
 | **Stock** | Unidades disponibles. Se calcula, nunca se escribe a mano. |
 | **Margen** | Porcentaje de ganancia sobre el costo del producto. |
 | **Costo promedio** | Costo del producto cuando llegan lotes a precios distintos. |
@@ -91,6 +93,7 @@ DUEÑO PRINCIPAL  (semilla; todos los permisos; no se desactiva)
 - Los vendedores no tienen usuario. Se registran para saber **qué vendieron** y **quién dañó qué producto**.
 - Los correos de aviso se envían por **SMTP**. No se usa WhatsApp en el MVP.
 - El sistema es **solo para mayores de edad**. Al registrar un Encargado o un Dueño se muestra un aviso que debe aceptarse.
+- Los productos se identifican solo por su nombre. El MVP prescinde de SKU y de seguimiento por color o serial.
 
 ### 2.3 Módulos del sistema
 
@@ -178,66 +181,80 @@ Cada módulo tiene su propia lógica, expresada en reglas de negocio (**RN**) y 
 
 ### RF-3 PRODUCTOS Y PRECIOS
 
-**Objetivo:** mantener el catálogo con su costo, margen, precio, stock mínimo y tiempo de garantía.
-**Roles que participan:** Dueño (completo), Encargado (solo consulta).
+**Objetivo:** Mantener el catálogo con su margen, precio, stock mínimo y tiempo de garantía. El costo viene de las entradas de mercancía.
+**Roles que participan:** Dueño (completo), Encargado (solo consulta)
 
 #### Reglas de negocio del módulo
 
-- **RN-3.1** Cada producto se identifica con un SKU único.
+- **RN-3.1** Cada producto se identifica por su nombre, que debe ser único. Se compara sin importar mayúsculas, tildes ni espacios de más. No hay SKU.
 - **RN-3.2** Precio sugerido = costo promedio × (1 + margen). El Dueño puede ajustar el precio final.
 - **RN-3.3** Costo promedio = (stock actual × costo actual + cantidad nueva × costo nuevo) ÷ (stock actual + cantidad nueva). Se calcula por local.
 - **RN-3.4** El Encargado solo ve nombre y precio de venta. Nunca costo, margen ni cantidades.
 - **RN-3.5** Cada producto tiene un tiempo de garantía en días (puede ser 0). Ese mismo plazo aplica a cambios y garantías.
+- **RN-3.6** Un producto nuevo, creado por una carga o a mano, queda pendiente de completar hasta que el Dueño le defina el precio. Un producto pendiente no se puede vender ni aparece en el catálogo del Encargado.
+- **RN-3.7** El costo de un producto es el costo de entrada que informa el proveedor (se recalcula como promedio con cada entrada). El Dueño define el margen y el precio de venta.
+- **RN-3.8** El color o la forma no se controlan por separado: dos unidades con el mismo nombre son el mismo producto. Si el Dueño quiere controlar una variante, debe escribirla en el nombre. Los equipos con serial se manejan igual: sin seguimiento por serial o IMEI.
+- **RN-3.9** Un producto se elimina solo si nunca tuvo movimientos de ningún tipo (ni siquiera de una carga anulada). Si tiene historial, solo se desactiva.
+- **RN-3.10** Al cambiar el nombre de un producto, el sistema advierte que las próximas cargas del proveedor deberán usar el nombre nuevo; de lo contrario aparecerán como producto nuevo.
 
 #### Requisitos funcionales
 
 | ID | Requisito | Rol |
 |---|---|---|
-| RF-3.1 | Crear y editar productos: SKU, nombre, categoría, costo, margen, precio, stock mínimo y días de garantía | Dueño |
+| RF-3.1 | Crear y editar productos a mano: nombre, categoría, margen, precio, stock mínimo y días de garantía | Dueño |
 | RF-3.2 | Gestionar categorías de productos | Dueño |
 | RF-3.3 | Definir el margen por categoría o por producto | Dueño |
 | RF-3.4 | Calcular y mostrar el precio sugerido, y permitir fijar el precio final | Dueño |
 | RF-3.5 | Recalcular el costo promedio automáticamente con cada entrada de mercancía | Sistema |
-| RF-3.6 | Consultar el catálogo mostrando solo nombre y precio de venta | Encargado |
+| RF-3.6 | Consultar el catálogo mostrando solo nombre y precio de venta de los productos con precio (los pendientes no aparecen) | Encargado |
 | RF-3.7 | Desactivar productos sin perder su historial | Dueño |
 | RF-3.8 | Guardar el historial de cambios de precio y margen (quién, cuándo, valor anterior y nuevo) | Sistema |
+| RF-3.9 | Eliminar un producto que nunca tuvo movimientos | Dueño |
+| RF-3.10 | Listar los productos pendientes de completar para definirles categoría y precio | Dueño |
 
 ---
 
 ### RF-4 ENTRADAS DE MERCANCÍA E INVENTARIO
 
-**Objetivo:** registrar la mercancía que llega a cada local y calcular cuánto hay de cada producto.
-**Roles que participan:** Dueño.
+**Objetivo:** Registrar la mercancía que llega a cada local y calcular cuánto hay de cada producto.
+**Roles que participan:** Dueño
 
 #### Reglas de negocio del módulo
 
 - **RN-4.1** El stock nunca se escribe a mano. Stock = entradas − salidas (ventas, cambios, dañados, garantías y faltantes) + devoluciones.
-- **RN-4.2** Cada entrada guarda fecha, local, proveedor, producto, cantidad y costo unitario.
+- **RN-4.2** Cada entrada pertenece a una carga (un documento del proveedor) y guarda: fecha de registro, local, proveedor, número y fecha del documento, producto, cantidad y costo unitario.
 - **RN-4.3** Solo el Dueño carga mercancía y ve el inventario.
 - **RN-4.4** La carga por CSV se valida completa antes de guardar: si algo falla, no se guarda nada.
 - **RN-4.5** El primer conteo de un local se registra como inventario inicial y es el punto de partida de todos los cálculos.
+- **RN-4.6** Una carga se identifica por proveedor + número de documento y no se puede registrar dos veces; para repetirla hay que anular la anterior. Si el documento no trae número, se identifica por proveedor + fecha + total (la suma de las líneas) y el sistema solo avisa de un posible duplicado.
+- **RN-4.7** Un producto del archivo se reconoce por su nombre exacto (sin importar mayúsculas, tildes ni espacios de más). Nunca se comparan nombres parecidos: si no coincide exactamente, se trata como producto nuevo y se ve en la vista previa.
+- **RN-4.8** El stock y el costo promedio cuentan desde la fecha en que se registra la carga. La fecha del documento se guarda solo como referencia.
+- **RN-4.9** Solo el Dueño anula una carga, con un motivo. No se puede anular si algún producto quedaría con stock negativo. La carga anulada queda en el historial y el mismo documento puede volver a cargarse. Los productos que esa carga creó permanecen en el catálogo y el Dueño puede desactivarlos.
+- **RN-4.10** El proveedor se identifica por su nombre; si no existe, se crea al registrar la carga.
 
 #### Requisitos funcionales
 
 | ID | Requisito | Rol |
 |---|---|---|
-| RF-4.1 | Registrar una entrada de mercancía de forma manual | Dueño |
-| RF-4.2 | Descargar una plantilla CSV con las columnas requeridas | Dueño |
+| RF-4.1 | Registrar una entrada de mercancía de forma manual: proveedor, número y fecha del documento, local y los productos con cantidad y costo | Dueño |
+| RF-4.2 | Descargar una plantilla CSV con las columnas: proveedor, número de documento, fecha del documento, descripción, cantidad, costo unitario y categoría (opcional) | Dueño |
 | RF-4.3 | Cargar entradas desde un archivo CSV, eligiendo el local de destino | Dueño |
-| RF-4.4 | Validar el CSV: columnas obligatorias, números válidos mayores a 0 y SKUs repetidos | Sistema |
-| RF-4.5 | Mostrar una vista previa antes de confirmar: productos nuevos, existentes y filas con error | Dueño |
+| RF-4.4 | Validar el CSV: columnas obligatorias, números válidos mayores a 0, descripciones repetidas dentro del archivo y que la carga no esté ya registrada | Sistema |
+| RF-4.5 | Mostrar una vista previa antes de confirmar: productos nuevos, existentes, filas con error y la suma de las líneas | Dueño |
 | RF-4.6 | Guardar toda la carga en una sola operación (todo o nada) | Sistema |
-| RF-4.7 | Crear automáticamente los productos cuyo SKU aún no existe | Sistema |
+| RF-4.7 | Crear automáticamente los productos nuevos, en estado pendiente de completar, cuando la descripción no coincide exactamente con un producto existente | Sistema |
 | RF-4.8 | Registrar el inventario inicial de un local | Dueño |
 | RF-4.9 | Calcular el stock por producto y por local | Sistema |
 | RF-4.10 | Consultar el inventario con stock, costo y valor total por local | Dueño |
 | RF-4.11 | Consultar el historial de movimientos (kardex) de cada producto | Dueño |
+| RF-4.12 | Anular una carga de mercancía indicando el motivo; el sistema recalcula el costo promedio y no la permite si algún producto quedaría con stock negativo | Dueño |
+| RF-4.13 | Consultar el listado de cargas: proveedor, número y fecha del documento, local, total y estado (activa o anulada) | Dueño |
 
 **Ejemplo de columnas del CSV:**
 
-```
-sku,nombre,categoria,cantidad,costo_unitario,proveedor,fecha
-FUN-IP14-NG,Funda iPhone 14 negra,Fundas,50,4500,ProvX,2026-11-17
+```csv
+proveedor,numero_documento,fecha_documento,descripcion,cantidad,costo_unitario,categoria
+ProvX,REM-001,2026-11-26,Funda iPhone 14 negra,50,4500,Fundas
 ```
 
 ---
@@ -431,7 +448,7 @@ FUN-IP14-NG,Funda iPhone 14 negra,Fundas,50,4500,ProvX,2026-11-17
 |---|---|---|
 | RNF-1 | Plataforma | Aplicación web que funcione bien en celular y en computador, sin instalar nada. |
 | RNF-2 | Seguridad | Contraseñas cifradas, conexión segura (HTTPS), sesiones con vencimiento, códigos de verificación con vencimiento y límite de intentos, y permisos validados en el servidor. |
-| RNF-3 | Integridad | Operaciones que afectan stock y caja se guardan completas o no se guardan. Nada se borra: se desactiva o se anula. |
+| RNF-3 | Integridad | Operaciones que afectan stock y caja se guardan completas o no se guardan. Nada con historial se borra: se desactiva o se anula. Solo un producto que nunca tuvo movimientos puede eliminarse. |
 | RNF-4 | Rendimiento | Registrar una venta y consultar reportes habituales en menos de 3 segundos. |
 | RNF-5 | Respaldo | Copias de seguridad automáticas de la información, como mínimo una diaria. |
 | RNF-6 | Usabilidad | Interfaz en español, registrar una venta en pocos pasos, moneda en pesos colombianos y zona horaria de Colombia. |
@@ -455,6 +472,8 @@ FUN-IP14-NG,Funda iPhone 14 negra,Fundas,50,4500,ProvX,2026-11-17
 | Inventario físico de 6 meses con monto definido por el Dueño | Facturación electrónica y tienda en línea |
 | Reportes de ganancias y pérdidas por local | Arriendos, servicios, gastos y nómina |
 | Alertas en panel y por correo SMTP | Acceso al sistema para los vendedores |
+| Productos reconocidos por su nombre, sin SKU | Seguimiento por serial o IMEI y control de colores por separado |
+| Anular cargas de mercancía | Lectura directa del PDF del proveedor y deudas con proveedores |
 
 ---
 
@@ -463,3 +482,4 @@ FUN-IP14-NG,Funda iPhone 14 negra,Fundas,50,4500,ProvX,2026-11-17
 - Hay un Dueño Principal (semilla) y puede haber Dueños secundarios. Hay un Encargado activo por local. Las correcciones de ventas las hace solo un Dueño, anulando con motivo.
 - El porcentaje del Encargado y el monto de los faltantes los define el Dueño; el sistema solo guarda el monto.
 - Los reclamos de garantía a proveedores se gestionan fuera del sistema. Idioma español, moneda en pesos colombianos y zona horaria de Colombia.
+- El Dueño transcribe las líneas del documento del proveedor a la plantilla CSV. Si el nombre no coincide, el producto aparece como nuevo en la vista previa y el Dueño puede corregirlo antes de confirmar.

@@ -10,4 +10,4 @@ El MVP reúne inventario, ventas, caja, cambios, garantías y reportes en una ap
 - Cerrar caja por local y ver la diferencia.
 - Identificar ganancias, pérdidas y garantías por separado.
 
-Fuente: [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf). Consulta el [alcance](../01-context/scope.md) y la [hoja de ruta](roadmap.md).
+Fuente: [SRS 1.2](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf). Consulta el [alcance](../01-context/scope.md) y la [hoja de ruta](roadmap.md).

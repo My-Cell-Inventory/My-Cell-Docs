@@ -6,6 +6,7 @@ Hechos de negocio derivados del SRS. Las consecuencias de la tabla describen el 
 | --- | --- | --- |
 | Encargado reemplazado | Se revoca el acceso anterior y se habilita al nuevo Encargado. | RF-1.5 |
 | Mercancía ingresada | Se actualizan stock y costo promedio por local. Un CSV confirmado se aplica completo. | RF-3.5, RF-4.1, RF-4.6, RF-4.9 |
+| Carga anulada | Se conserva la carga en el historial y se recalcula el costo promedio. El sistema impide anular si deja stock negativo. | RN-4.9, RF-4.12 |
 | Venta registrada | Se registra ingreso a caja y se descuentan existencias. Se conserva precio, costo y garantía. | RN-4.1, RN-5.2, RF-5.5 |
 | Venta anulada | Se repone stock, se ajusta caja y se conserva el motivo. | RF-5.11 |
 | Cierre de caja con diferencia | Se alerta al Dueño y al Encargado del local. | RF-5.10, RF-9.5 |

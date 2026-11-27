@@ -6,8 +6,9 @@
 | --- | --- | --- |
 | Usuario / local | Cada usuario tiene un número de documento único. El Encargado pertenece a un local y el Dueño secundario tiene módulos asignados por el Principal. Se conserva el historial al desactivar. | RN-1.1 a RN-1.11 |
 | Vendedor | Nombre y local. Su atribución es opcional en ventas y obligatoria en dañados. | RN-2.3, RN-2.4, RN-5.6, RN-7.1 |
-| Producto / categoría | SKU único, margen, precio, stock mínimo y plazo de garantía. | RN-3.1 a RN-3.5 |
-| Entrada / existencia | Entradas por local con proveedor, cantidad y costo unitario. Existencia calculada desde los movimientos. | RN-4.1 a RN-4.5 |
+| Producto / categoría | Nombre único comparado sin mayúsculas, tildes ni espacios extra, margen, precio, stock mínimo y garantía. Un producto nuevo queda pendiente hasta tener precio. | RN-3.1 a RN-3.10 |
+| Proveedor / carga | Carga identificada por proveedor y documento. Anulación con motivo, historial y control de stock negativo. | RN-4.6, RN-4.8 a RN-4.10 |
+| Entrada / existencia | Entradas por carga, local y producto con cantidad y costo unitario. El stock se calcula a partir de los movimientos. | RN-4.1 a RN-4.5, RN-4.7 |
 | Venta y detalle | Consecutivo, local y líneas con precio, costo del momento y vencimiento de garantía. | RN-5.2 a RN-5.6, RF-5.2 |
 | Movimiento de caja / cierre | Ingresos y egresos, efectivo o transferencia. Cierre con total esperado, contado y diferencia. | RN-5.7, RF-5.10 |
 | Cambio / garantía | Relacionados con la venta y su unidad. El cambio puede mover caja y la garantía puede consumir un reemplazo. | RN-6.1 a RN-6.9 |

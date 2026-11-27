@@ -4,7 +4,7 @@ Organiza los requisitos funcionales, no funcionales, historias de usuario y su t
 
 - [Plantilla de hu](_template-hu.md)
 
-## Especificación del MVP · versión 1.1
+## Especificación del MVP · versión 1.2
 
 - [SRS del Sistema de Inventario MVP · PDF](srs-sistema-inventario-mvp-mycell.pdf)
 - [SRS del Sistema de Inventario MVP · Markdown](srs-sistema-inventario-mvp-mycell.md)

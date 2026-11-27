@@ -6,7 +6,7 @@ Aplica mínimo privilegio para quienes administran o contribuyen al repositorio.
 
 ## Aplicación
 
-El SRS limita el acceso al Dueño y al Encargado. El servidor valida el rol, el local del Encargado y los módulos habilitados para el Dueño secundario según la operación. Los vendedores carecen de cuenta. El acceso a costos, ganancias, inventario y bitácora se reserva al Dueño según la matriz de permisos del [SRS 1.1](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf).
+El SRS limita el acceso al Dueño y al Encargado. El servidor valida el rol, el local del Encargado y los módulos habilitados para el Dueño secundario según la operación. Los vendedores carecen de cuenta. El acceso a costos, ganancias, inventario y bitácora se reserva al Dueño según la matriz de permisos del [SRS 1.2](../04-requirements/srs-sistema-inventario-mvp-mycell.pdf).
 
 ## Documentos y evidencias
 

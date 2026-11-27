@@ -6,8 +6,8 @@ Agrupación inicial de capacidades del MVP. Las historias y fechas de entrega qu
 | --- | --- | --- |
 | Acceso | `RF-1.1–1.10` | Asignación de local junto con RF-2 |
 | Locales y vendedores | `RF-2.1–2.5` | Usuarios y permisos RF-1 |
-| Productos y precios | `RF-3.1–3.8` | Costo promedio coordinado con RF-4 |
-| Mercancía e inventario | `RF-4.1–4.11` | Locales RF-2 y catálogo RF-3 |
+| Productos y precios | `RF-3.1–3.10` | Costo promedio coordinado con RF-4 |
+| Mercancía e inventario | `RF-4.1–4.13` | Locales RF-2 y catálogo RF-3 |
 | Ventas y caja | `RF-5.1–5.12` | Inventario RF-4 y catálogo RF-3 |
 | Cambios y garantías | `RF-6.1–6.10` | Venta, caja y stock RF-5 / RF-4 |
 | Control físico | `RF-7.1–7.11` | Movimientos RF-4 y vendedores RF-2 |
