@@ -10,3 +10,4 @@ Organiza los requisitos funcionales, no funcionales, historias de usuario y su t
 - [SRS del Sistema de Inventario MVP · Markdown](srs-sistema-inventario-mvp-mycell.md)
 - [Requisitos funcionales y reglas de negocio](functional.md)
 - [Requisitos no funcionales](non-functional.md)
+- [Diccionario de datos de RF-1 y RF-2](data-dictionary-rf-1-rf-2.md)

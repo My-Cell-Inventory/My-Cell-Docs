@@ -24,3 +24,4 @@ Al elaborar cada entregable, indica de qué caso de uso o RF parte. Guarda los a
 | Diagrama de actividades de MY CELL | Actividad | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1xk0R3M2os1-ztKDA7OPRayBu6HVXVKGF/view?usp=sharing) |
 | Diagrama de secuencia de MY CELL | Secuencia | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1OdxisakzvcdQj-t7NMnDvZRUGsuGGV8F/view?usp=sharing) |
 | Diagrama de transición de estados de MY CELL | Transición de estados | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1WYFgxKDreh5wzRbe61E3TENfvQ3RA3EG/view?usp=sharing) |
+| Diagrama de dominio de MY CELL | Dominio | [Ver el diagrama en Google Drive](https://drive.google.com/file/d/1nDB0cw9PyXsh10L_mLP9PqI1Mc6hCD3m/view?usp=sharing) |
